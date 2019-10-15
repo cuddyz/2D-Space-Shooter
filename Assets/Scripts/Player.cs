@@ -4,15 +4,47 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    // public or private reference
+    // public can be changed by other objects
+    // data type (int, float, bool, string)
+    // every var has a name
+
+    // SerializeField lets it be changed in inspector, but not by other game objects
+    [SerializeField]
+    private float _speed = 3.5f;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        // take the current position and set starting position (0,0,0)
+        transform.position = new Vector3(0,0,0);
     }
 
     // Update is called once per frame
     void Update()
     {
+        CalculateMovement();
+    }
+
+    void CalculateMovement() {
+        float xInput = Input.GetAxis("Horizontal");
+        float yInput = Input.GetAxis("Vertical");
         
+        Vector3 direction = new Vector3(xInput, yInput, 0);
+        transform.Translate(direction * _speed * Time.deltaTime);
+
+        CheckBounds();
+    }
+
+    void CheckBounds() {
+        // Lock in-between y -3.8f and 0
+        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.8f, 0), 0);
+
+        // No clamp here, since we are "teleporting"
+        if (transform.position.x > 11.3f) {
+            transform.position = new Vector3(-11.3f, transform.position.y, 0);
+        } else if (transform.position.x < -11.3f) {
+            transform.position = new Vector3(11.3f, transform.position.y, 0);
+        }
     }
 }
