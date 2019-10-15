@@ -23,18 +23,24 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CalculateMovement();
+    }
+
+    void CalculateMovement() {
         float xInput = Input.GetAxis("Horizontal");
         float yInput = Input.GetAxis("Vertical");
         
         Vector3 direction = new Vector3(xInput, yInput, 0);
         transform.Translate(direction * _speed * Time.deltaTime);
 
-        if (transform.position.y >= 0) {
-            transform.position = new Vector3(transform.position.x, 0, 0);
-        } else if (transform.position.y <= -3.8f) {
-            transform.position = new Vector3(transform.position.x, -3.8f, 0);
-        }
+        CheckBounds();
+    }
 
+    void CheckBounds() {
+        // Lock in-between y -3.8f and 0
+        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.8f, 0), 0);
+
+        // No clamp here, since we are "teleporting"
         if (transform.position.x > 11.3f) {
             transform.position = new Vector3(-11.3f, transform.position.y, 0);
         } else if (transform.position.x < -11.3f) {
