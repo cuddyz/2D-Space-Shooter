@@ -19,8 +19,8 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnEnemies() {
         while(true) {
-            yield return new WaitForSeconds(5);
             Instantiate(enemyPrefab, new Vector3(0,0,0), Quaternion.identity);
+            yield return new WaitForSeconds(5);
         }
     }
 }
