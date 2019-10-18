@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     public GameObject enemyPrefab;
+    public GameObject enemyContainer;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +20,9 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnEnemies() {
         while(true) {
-            Instantiate(enemyPrefab, new Vector3(0,0,0), Quaternion.identity);
+            GameObject newEnemy = Instantiate(enemyPrefab, new Vector3(0,0,0), Quaternion.identity);
+            newEnemy.transform.parent = enemyContainer.transform;
+
             yield return new WaitForSeconds(5);
         }
     }
