@@ -6,6 +6,7 @@ public class SpawnManager : MonoBehaviour
 {
     public GameObject enemyPrefab;
     public GameObject enemyContainer;
+    private bool _stopSpawning = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,8 +19,12 @@ public class SpawnManager : MonoBehaviour
         
     }
 
+    public void OnPlayerDeath() {
+        _stopSpawning = true;
+    }
+
     IEnumerator SpawnEnemies() {
-        while(true) {
+        while(!_stopSpawning) {
             GameObject newEnemy = Instantiate(enemyPrefab, new Vector3(0,0,0), Quaternion.identity);
             newEnemy.transform.parent = enemyContainer.transform;
 
