@@ -12,6 +12,10 @@ public class Player : MonoBehaviour
     // SerializeField lets it be changed in inspector, but not by other game objects
     [SerializeField]
     private float _speed = 3.5f;
+
+    [SerializeField]
+    private float _fireRate = 0.15f;
+    private float _canFire = -1f;
     public GameObject laserPrefab;
 
     // Start is called before the first frame update
@@ -29,7 +33,8 @@ public class Player : MonoBehaviour
     }
 
     void FireLaser() {
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKey(KeyCode.Space) && Time.time > _canFire) {
+            _canFire = Time.time + _fireRate;
             Instantiate(laserPrefab, new Vector3(transform.position.x, transform.position.y + 1, 0), Quaternion.identity);
         }
     }
