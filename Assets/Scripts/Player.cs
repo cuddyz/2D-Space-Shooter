@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
 
     void FireLaser() {
         if (Input.GetKeyDown(KeyCode.Space)) {
-            Instantiate(laserPrefab, transform.position, Quaternion.identity);
+            Instantiate(laserPrefab, new Vector3(transform.position.x, transform.position.y + 1, 0), Quaternion.identity);
         }
     }
 
