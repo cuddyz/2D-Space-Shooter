@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     // SerializeField lets it be changed in inspector, but not by other game objects
     [SerializeField]
     private float _speed = 3.5f;
+    public GameObject laserPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,13 @@ public class Player : MonoBehaviour
     void Update()
     {
         CalculateMovement();
+        FireLaser();
+    }
+
+    void FireLaser() {
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            Instantiate(laserPrefab, transform.position, Quaternion.identity);
+        }
     }
 
     void CalculateMovement() {
