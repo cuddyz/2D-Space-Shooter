@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 605934248}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -148,7 +148,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 605934243}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
@@ -236,11 +236,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7085607409927503155, guid: 2a056b7b88f9e43e69fb826113eb2377,
-        type: 3}
-      propertyPath: _speed
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 7821151664543906137, guid: 2a056b7b88f9e43e69fb826113eb2377,
         type: 3}
       propertyPath: m_Name

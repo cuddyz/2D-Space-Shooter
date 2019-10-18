@@ -22,6 +22,18 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter(Collider other) {
+        if (other.tag == "Player") {
+            // Damage Player
+             Destroy(this.gameObject);
+        } else if (other.tag == "Laser") {
+            Destroy(other.gameObject);
+            Destroy(this.gameObject);
+        } else {
+            Debug.Log("Unexpected Collision: " + other);
+        }
+    }
+
     void respawn() {
         float ran = Random.Range(-9f, 9f);
         transform.position = new Vector3 (ran, 7f, 0);
