@@ -15,7 +15,13 @@ public class Laser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 direction = new Vector3(0, 1, 0);
-        transform.Translate(direction * _speed * Time.deltaTime);
+        transform.Translate(Vector3.up * _speed * Time.deltaTime);
+        tryCleanUp();
+    }
+
+    void tryCleanUp() {
+        if (transform.position.y > 8f) {
+            Destroy(this.gameObject);
+        }
     }
 }
