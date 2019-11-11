@@ -40,7 +40,7 @@ public class Powerup : MonoBehaviour
                         player.ActivateSpeed();
                         break;
                     case 2:
-                        // player.ActivateShield();
+                        player.ActivateShield();
                         break;
                     default: 
                         Debug.Log("Unknown Powerup!");

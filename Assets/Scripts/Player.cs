@@ -22,9 +22,11 @@ public class Player : MonoBehaviour
     private SpawnManager _spawnManager;
     private bool _isTripleShotActive = false;
     private bool _isSpeedActive = false;
+    private bool _isShieldActive = false;
     
     public GameObject laserPrefab;
     public GameObject tripleShotPrefab;
+    public GameObject playerShield;
 
 
 
@@ -88,11 +90,16 @@ public class Player : MonoBehaviour
     }
 
     public void Damage() {
-        _lives -= 1;
+        if (_isShieldActive) {
+            _isShieldActive = false;
+            playerShield.SetActive(false);
+        } else {
+            _lives -= 1;
 
-        if (_lives < 1) {
-            _spawnManager.OnPlayerDeath();
-            Destroy(this.gameObject);
+            if (_lives < 1) {
+                _spawnManager.OnPlayerDeath();
+                Destroy(this.gameObject);
+            }
         }
     }
 
@@ -114,5 +121,10 @@ public class Player : MonoBehaviour
     IEnumerator SpeedPowerDownRoutine() {
         yield return new WaitForSeconds(5);
         _isSpeedActive = false;
+    }
+
+    public void ActivateShield() {
+        _isShieldActive = true;
+        playerShield.SetActive(true);
     }
 }
