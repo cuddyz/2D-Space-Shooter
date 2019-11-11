@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     private float _canFire = -1f;
     private SpawnManager _spawnManager;
     private bool _isTripleShotActive = false;
+    private bool _isSpeedActive = false;
     
     public GameObject laserPrefab;
     public GameObject tripleShotPrefab;
@@ -95,5 +96,15 @@ public class Player : MonoBehaviour
     IEnumerator TripleShotPowerDownRoutine() {
         yield return new WaitForSeconds(5);
         _isTripleShotActive = false;
+    }
+
+    public void ActivateSpeed() {
+        _isSpeedActive = true;
+        StartCoroutine(SpeedPowerDownRoutine());
+    }
+
+    IEnumerator SpeedPowerDownRoutine() {
+        yield return new WaitForSeconds(5);
+        _isSpeedActive = false;
     }
 }
