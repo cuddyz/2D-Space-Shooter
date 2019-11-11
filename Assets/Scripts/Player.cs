@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
     
     public GameObject laserPrefab;
     public GameObject tripleShotPrefab;
+    public GameObject playerShield;
 
 
 
@@ -91,6 +92,7 @@ public class Player : MonoBehaviour
     public void Damage() {
         if (_isShieldActive) {
             _isShieldActive = false;
+            playerShield.SetActive(false);
         } else {
             _lives -= 1;
 
@@ -123,5 +125,6 @@ public class Player : MonoBehaviour
 
     public void ActivateShield() {
         _isShieldActive = true;
+        playerShield.SetActive(true);
     }
 }
