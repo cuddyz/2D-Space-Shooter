@@ -62,7 +62,13 @@ public class Player : MonoBehaviour
         float yInput = Input.GetAxis("Vertical");
         
         Vector3 direction = new Vector3(xInput, yInput, 0);
-        transform.Translate(direction * _speed * Time.deltaTime);
+
+        float currentSpeed = _speed;
+        if (_isSpeedActive) {
+            currentSpeed = 8.5f;
+        }
+
+        transform.Translate(direction * currentSpeed * Time.deltaTime);
 
         CheckBounds();
     }

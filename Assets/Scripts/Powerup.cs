@@ -44,6 +44,7 @@ public class Powerup : MonoBehaviour
                         break;
                     default: 
                         Debug.Log("Unknown Powerup!");
+                        break;
                 }
             }
             Destroy(this.gameObject);
