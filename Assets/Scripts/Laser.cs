@@ -21,6 +21,9 @@ public class Laser : MonoBehaviour
 
     void tryCleanUp() {
         if (transform.position.y > 8f) {
+            if (transform.parent) {
+                Destroy(transform.parent.gameObject);
+            }
             Destroy(this.gameObject);
         }
     }
