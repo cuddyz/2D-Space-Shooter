@@ -13,12 +13,15 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _speed = 3.5f;
     [SerializeField]
+    private float _speedMultiplier = 2;
+    [SerializeField]
     private float _fireRate = 0.15f;
     [SerializeField]
     private int _lives = 3;
     private float _canFire = -1f;
     private SpawnManager _spawnManager;
     private bool _isTripleShotActive = false;
+    private bool _isSpeedActive = false;
     
     public GameObject laserPrefab;
     public GameObject tripleShotPrefab;
@@ -61,7 +64,13 @@ public class Player : MonoBehaviour
         float yInput = Input.GetAxis("Vertical");
         
         Vector3 direction = new Vector3(xInput, yInput, 0);
-        transform.Translate(direction * _speed * Time.deltaTime);
+
+        float currentSpeed = _speed;
+        if (_isSpeedActive) {
+            currentSpeed = _speed * _speedMultiplier;
+        }
+
+        transform.Translate(direction * currentSpeed * Time.deltaTime);
 
         CheckBounds();
     }
@@ -95,5 +104,15 @@ public class Player : MonoBehaviour
     IEnumerator TripleShotPowerDownRoutine() {
         yield return new WaitForSeconds(5);
         _isTripleShotActive = false;
+    }
+
+    public void ActivateSpeed() {
+        _isSpeedActive = true;
+        StartCoroutine(SpeedPowerDownRoutine());
+    }
+
+    IEnumerator SpeedPowerDownRoutine() {
+        yield return new WaitForSeconds(5);
+        _isSpeedActive = false;
     }
 }

@@ -5,8 +5,8 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     public GameObject enemyPrefab;
-    public GameObject tripleShotPrefab;
     public GameObject enemyContainer;
+    public GameObject[] powerups;
     private bool _stopSpawning = false;
     // Start is called before the first frame update
     void Start()
@@ -37,9 +37,10 @@ public class SpawnManager : MonoBehaviour
 
     IEnumerator SpawnPowerups() {
         while(!_stopSpawning) {
-            float ran = Random.Range(-9f, 9f);
+            float ranX = Random.Range(-9f, 9f);
             float ranTime = Random.Range(3f, 8f);
-            Instantiate(tripleShotPrefab, new Vector3 (ran, 7f, 0), Quaternion.identity);
+            int ranPowerUp = Random.Range(0, 2);
+            Instantiate(powerups[ranPowerUp], new Vector3 (ranX, 7f, 0), Quaternion.identity);
 
             yield return new WaitForSeconds(ranTime);
         }
